@@ -32,9 +32,12 @@ void Player::update_position(float elapsed_time) {
 		this->velocity.x = 0;
 	}
 	this->previous_position = this->position[0];
-	for (int s = 0; s < this->size; s++) {
-		this->position[s] += this->velocity * elapsed_time;
+	if(this->velocity.x + this->velocity.y != 0) {
+		for (int s = this->size - 1; s > 0; s--) {
+			this->position[s] = this->position[s-1];
+		}
 	}
+	this->position[0] += this->velocity * elapsed_time;
 	this->right_edge = this->position[0].x + this->width/2;
 	this->left_edge = this->position[0].x - this->width/2;
 	this->top_edge = this->position[0].y - this->height/2;
@@ -72,10 +75,12 @@ void Player::handle_collision(std::string collision_type) {
 void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	sf::Transform render_position;
 	render_position.translate(this->position[0]);
+	//std::cout << this->position[0].x << " " << this->position[0].y << std::endl;
+	//std::cout << this->position[1].x << " " << this->position[1].y << std::endl;
 	states.transform = render_position;
 	target.draw(this->shape[0], states);
 	for (int s = 1; s < this->size; s++) {
-		render_position.translate(sf::Vector2f(this->width/2, 0));
+		render_position.translate(this->position[s] - this->position[s-1]);
 		states.transform = render_position;
 		target.draw(this->shape[s], states);
 	}
