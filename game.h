@@ -3,6 +3,7 @@
 #include <iostream>
 #include "food.h"
 #include "player.h"
+#include "collision_handler.h"
 
 #ifndef GAME_H
 #define GAME_H
@@ -12,6 +13,7 @@ class Game {
 		sf::RenderWindow* window;
 		sf::VideoMode vm;
 		sf::Event event;
+		CollisionHandler collision_handler;
 		Player* player;
 		Food* food;
 		sf::Clock clock;

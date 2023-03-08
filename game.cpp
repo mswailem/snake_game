@@ -36,19 +36,6 @@ void Game::pollEvents() {
 	}
 }
 
-std::string Game::detect_collisions() {
-	if (this->player->right_edge >= this->vm.width)	return "right";
-	if (this->player->bot_edge >= this->vm.height) return "down";
-	if (this->player->left_edge <= 0)	return "left";
-	if (this->player->top_edge <= 0) return "up";
-	float dx = this->player->position[0].x - this->food->position.x;
-	float dy = this->player->position[0].y - this->food->position.y;
-	if (std::abs(dx) <= (this->player->width/2+this->food->width/2) && std::abs(dy) <= (this->player->height/2+this->food->height/2)) {
-		this->food->reposition();
-		return "food";
-	}
-	return "NONE";
-}
 
 void Game::update() {
 	this->pollEvents();
@@ -56,7 +43,7 @@ void Game::update() {
 	this->player->get_input();
 	if (frametime.asSeconds() >	time_to_upadate.asSeconds()) {
 		this->player->update_position();
-		this->player->handle_collision(this->detect_collisions());
+		this->collision_handler.detect_collisions(this->player,this->food,this->vm);
 		this->clock.restart();
 	}
 }

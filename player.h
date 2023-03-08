@@ -7,12 +7,13 @@
 
 class Player : public sf::Drawable {
 	private:
-		std::vector<sf::RectangleShape> shape;
-		sf::Vector2<float> previous_position;
+
 	public:
 		float width;
 		float height;
+		std::vector<sf::RectangleShape> shape;
 		std::vector<sf::Vector2<float>> position;
+		sf::Vector2<float> previous_position;
 		sf::Vector2<float> velocity;
 		float right_edge;
 		float left_edge;
