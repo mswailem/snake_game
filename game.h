@@ -16,6 +16,7 @@ class Game {
 		Food* food;
 		sf::Clock clock;
 		sf::Time frametime;
+		sf::Time time_to_upadate;
 
 	public:
 

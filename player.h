@@ -26,7 +26,8 @@ class Player : public sf::Drawable {
 	
 	virtual ~Player();
 
-	void update_position(float elapsed_time); 
+	void get_input();
+	void update_position(); 
 	void handle_collision(std::string collision_type);
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const; 
 };

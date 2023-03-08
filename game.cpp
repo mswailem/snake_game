@@ -1,4 +1,5 @@
 #include "game.h"
+#include <SFML/System/Time.hpp>
 #include <cmath>
 
 Game::Game() {
@@ -6,6 +7,7 @@ Game::Game() {
 	this->init_window();
 	this->player = new Player(sf::Vector2f((float)this->vm.width/2, (float)this->vm.height/2));
 	this->food = new Food();
+	this->time_to_upadate = sf::seconds(0.2f);
 }
 
 Game::~Game() {
@@ -51,9 +53,12 @@ std::string Game::detect_collisions() {
 void Game::update() {
 	this->pollEvents();
 	this->frametime = this->clock.getElapsedTime();
-	this->clock.restart();
-	this->player->update_position(frametime.asSeconds());
-	this->player->handle_collision(this->detect_collisions());
+	this->player->get_input();
+	if (frametime.asSeconds() >	time_to_upadate.asSeconds()) {
+		this->player->update_position();
+		this->player->handle_collision(this->detect_collisions());
+		this->clock.restart();
+	}
 }
 
 void Game::render() {

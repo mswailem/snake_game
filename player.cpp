@@ -6,7 +6,7 @@ Player::Player(sf::Vector2<float> init_position) {
 	this->shape.push_back(sf::RectangleShape());
 	this->shape[0].setSize(sf::Vector2f(this->width,this->height));
 	this->shape[0].setOrigin(this->width/2,this->height/2);
-	this->speed = 150.f;
+	this->speed = 1.f;
 	this->size = 1;
 	this->position.push_back(init_position);
 }
@@ -14,7 +14,7 @@ Player::Player(sf::Vector2<float> init_position) {
 Player::~Player() {
 }
 
-void Player::update_position(float elapsed_time) {
+void Player::get_input() {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
 		this->velocity.x =-this->speed;
 		this->velocity.y = 0;
@@ -31,13 +31,16 @@ void Player::update_position(float elapsed_time) {
 		this->velocity.y =this->speed;
 		this->velocity.x = 0;
 	}
+}
+
+void Player::update_position() {
 	this->previous_position = this->position[0];
 	if(this->velocity.x + this->velocity.y != 0) {
 		for (int s = this->size - 1; s > 0; s--) {
 			this->position[s] = this->position[s-1];
 		}
 	}
-	this->position[0] += this->velocity * elapsed_time;
+	this->position[0] += this->width * this->velocity;
 	this->right_edge = this->position[0].x + this->width/2;
 	this->left_edge = this->position[0].x - this->width/2;
 	this->top_edge = this->position[0].y - this->height/2;
