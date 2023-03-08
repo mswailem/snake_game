@@ -40,10 +40,10 @@ void Game::pollEvents() {
 void Game::update() {
 	this->pollEvents();
 	this->frametime = this->clock.getElapsedTime();
-	this->player->get_input();
+	this->input_handler.handle_inputs(this->player);
 	if (frametime.asSeconds() >	time_to_upadate.asSeconds()) {
-		this->player->update_position();
 		this->collision_handler.detect_collisions(this->player,this->food,this->vm);
+		this->player->update_position();
 		this->clock.restart();
 	}
 }

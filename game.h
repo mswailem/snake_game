@@ -4,6 +4,7 @@
 #include "food.h"
 #include "player.h"
 #include "collision_handler.h"
+#include "input_handler.h"
 
 #ifndef GAME_H
 #define GAME_H
@@ -14,6 +15,7 @@ class Game {
 		sf::VideoMode vm;
 		sf::Event event;
 		CollisionHandler collision_handler;
+		InputHandler input_handler;
 		Player* player;
 		Food* food;
 		sf::Clock clock;

@@ -15,7 +15,7 @@ class CollisionHandler {
 
 	virtual ~CollisionHandler();
 
-	std::string detect_collisions(Player* player, Food* food, sf::VideoMode vm);
+	void detect_collisions(Player* player, Food* food, sf::VideoMode vm);
 
 };
 

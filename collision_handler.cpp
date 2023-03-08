@@ -7,13 +7,11 @@ CollisionHandler::~CollisionHandler() {
 CollisionHandler::CollisionHandler(){
 }
 
-std::string CollisionHandler::detect_collisions(Player* player, Food* food, sf::VideoMode vm) {
-	if (player->right_edge >= vm.width || player->bot_edge >= vm.height){
-		player->position[0]  = player->previous_position;
+void CollisionHandler::detect_collisions(Player* player, Food* food, sf::VideoMode vm) {
+	if (player->right_edge +(player->width * player->velocity.x)>= vm.width || player->left_edge + (player->width * player->velocity.x) <= 0){
 		player->velocity.x = 0;
 	}
-	if (player->left_edge <= 0 || player->top_edge <= 0)	{
-		player->position[0]  = player->previous_position;
+	if (player->bot_edge + (player->width * player->velocity.y) >= vm.height || player->top_edge + (player->width * player->velocity.y) <= 0)	{
 		player->velocity.y = 0;
 	}
 	float dx = player->position[0].x - food->position.x;
@@ -26,5 +24,4 @@ std::string CollisionHandler::detect_collisions(Player* player, Food* food, sf::
 		player->shape[player->size].setOrigin(player->width/2,player->height/2);
 		player->size += 1;
 	}
-	return "NONE";
 }
