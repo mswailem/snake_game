@@ -9,7 +9,7 @@
 #ifndef GAME_H
 #define GAME_H
 
-class Game {
+class Game { 
 	private:
 		sf::RenderWindow* window;
 		sf::VideoMode vm;
@@ -35,7 +35,6 @@ class Game {
 	void pollEvents();
 	void update();
 	void render();
-	std::string detect_collisions();
 
 };
 

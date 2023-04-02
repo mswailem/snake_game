@@ -16,11 +16,12 @@ Player::~Player() {
 
 void Player::update_position() {
 	this->previous_position = this->position[0];
-	if(this->velocity.x + this->velocity.y != 0) {
+	if(this->velocity.x + this->velocity.y != 0) { //Only update position if the player is moving
 		for (int s = this->size - 1; s > 0; s--) {
 			this->position[s] = this->position[s-1];
 		}
 	}
+	//Updating position and edges
 	this->position[0] += this->width * this->velocity;
 	this->right_edge = this->position[0].x + this->width/2;
 	this->left_edge = this->position[0].x - this->width/2;
@@ -31,8 +32,6 @@ void Player::update_position() {
 void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	sf::Transform render_position;
 	render_position.translate(this->position[0]);
-	//std::cout << this->position[0].x << " " << this->position[0].y << std::endl;
-	//std::cout << this->position[1].x << " " << this->position[1].y << std::endl;
 	states.transform = render_position;
 	target.draw(this->shape[0], states);
 	for (int s = 1; s < this->size; s++) {

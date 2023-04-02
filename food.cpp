@@ -23,6 +23,7 @@ void Food::reposition() {
 	float x_pos = (float) rand()/(float)RAND_MAX * 300;
 	float y_pos = (float) rand()/(float)RAND_MAX * 300;
 	this->position = sf::Vector2f(x_pos,y_pos);
+	//TODO: Check if the new position is not inside the player
 }
 
 void Food::draw(sf::RenderTarget& target, sf::RenderStates states) const {
