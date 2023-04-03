@@ -19,7 +19,7 @@ void CollisionHandler::detect_collisions(Player* player, Food* food, sf::VideoMo
 	}
 
 	//Check if the player is colliding with itself
-	for (int s = 1; s < player->size; s++) {
+	for (int s = 3; s < player->size; s++) {
 		float dx = player->position[s].x - player->position[0].x;
 		int sign_dx = dx != 0? ceil(dx/std::abs(dx)) : 0;
 		float dy = player->position[s].y - player->position[0].y;
