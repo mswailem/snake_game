@@ -1,9 +1,9 @@
 #!/bin/sh
 
-x86_64-w64-mingw32-g++ -c *.cpp -DSFML_STATIC
+g++ -c *.cpp
 
-x86_64-w64-mingw32-g++ *.o -o bin/game.exe -lsfml-graphics-s -lsfml-window-s -lsfml-system-s -lopengl32 -lwinmm -lgdi32 -static-libgcc -static-libstdc++
+mv *.o bin
 
-#bin/game
+g++ bin/*.o -o bin/game -lsfml-graphics -lsfml-window -lsfml-system
 
-powershell.exe Start bin/game.exe
+bin/game
